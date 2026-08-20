@@ -1,0 +1,164 @@
+@import '@xyflow/react/dist/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background: #121212;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* Glowing dot-matrix grid */
+.react-flow__background {
+  background: #121212;
+}
+
+/* Frosted glass node base */
+.glass-node {
+  @apply relative rounded-xl border border-white/15 bg-white/10 backdrop-blur-xl;
+  @apply shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+  min-width: 200px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-node:hover {
+  @apply border-white/30;
+}
+
+.glass-node.selected {
+  @apply border-indigo-400/60;
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.3);
+}
+
+/* Custom handles */
+.react-flow__handle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(99, 102, 241, 0.8);
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.9);
+}
+
+/* Glowing edges */
+.react-flow__edge-path {
+  stroke: rgba(34, 211, 238, 0.75);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.6));
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: rgba(167, 139, 250, 0.95);
+  filter: drop-shadow(0 0 9px rgba(167, 139, 250, 0.8));
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 8 4;
+  animation: dashdraw 0.6s linear infinite;
+}
+
+.react-flow__connection-path {
+  stroke: rgba(34, 211, 238, 0.7);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.5));
+}
+
+@keyframes dashdraw {
+  from {
+    stroke-dashoffset: 12;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Generate button glow pulse */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 40px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.7), 0 0 60px rgba(99, 102, 241, 0.2);
+  }
+}
+
+.btn-generate {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* Sidebar drag items */
+.sidebar-item {
+  @apply flex cursor-grab items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-4 py-3;
+  @apply backdrop-blur-md transition-all duration-200;
+}
+
+.sidebar-item:hover {
+  @apply border-white/25 bg-white/10;
+  transform: translateX(4px);
+}
+
+.sidebar-item:active {
+  cursor: grabbing;
+}
+
+/* Glassmorphic form controls inside nodes */
+.glass-input {
+  @apply w-full rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs text-white/90;
+  @apply outline-none backdrop-blur-sm transition-all duration-150;
+}
+
+.glass-input::placeholder {
+  @apply text-white/25;
+}
+
+.glass-input:focus {
+  @apply border-cyan-400/50 bg-white/10;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.25);
+}
+
+.glass-select {
+  @apply rounded-md border border-white/10 bg-white/5 px-2 py-1.5 text-xs text-white/90;
+  @apply cursor-pointer outline-none backdrop-blur-sm transition-all duration-150;
+}
+
+.glass-select:focus {
+  @apply border-cyan-400/50 bg-white/10;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.25);
+}
+
+.glass-select option {
+  background: #1e1e1e;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.glass-mini-btn {
+  @apply flex items-center gap-1 rounded-md border border-emerald-400/25 bg-emerald-500/10 px-2 py-1;
+  @apply text-[10px] font-medium text-emerald-300 transition-all duration-150;
+}
+
+.glass-mini-btn:hover {
+  @apply border-emerald-400/50 bg-emerald-500/20;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+}
+
+.glass-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.glass-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.glass-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
